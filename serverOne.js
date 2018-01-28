@@ -6,10 +6,8 @@ const PORT = 7777;
 
 // Create a function which handles incoming requests and sends responses
 function handleRequest(req, res) {
-
   // Capture the url the request is made to
   var path = req.url;
-
   // Depending on the URL, display a different HTML file.
   switch (path) {
     case "/":
@@ -23,10 +21,9 @@ function handleRequest(req, res) {
     default:
       return display404(path, req, res);
   }
-}
+};
 
-
-// When someone visits the "http://localhost:8080/" path, this function is run.
+// When someone visits the "http://localhost:PORT/" path, this function is run.
 function displayRoot(url, req, res) {
   // Here we use the fs package to read our index.html file
   fs.readFile(__dirname + "/favorites/index.html", function(err, data) {
@@ -61,7 +58,7 @@ function displayAnimals(url, req, res) {
     res.writeHead(200, { "Content-Type": "text/html" });
     res.end(data);
   });
-}
+};
 
 // When someone visits any path that is not specifically defined, this function is run.
 function display404(url, req, res) {
@@ -73,8 +70,7 @@ function display404(url, req, res) {
   res.writeHead(404, { "Content-Type": "text/html" });
   // End the response by sending the client the myHTML string (which gets rendered as an HTML document thanks to the code above)
   res.end(myHTML);
-}
-
+};
 
 // create servers and give them the functions to handle requests
 var server = http.createServer(handleRequest);
